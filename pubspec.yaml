@@ -48,7 +48,7 @@ flutter_native_splash:
     image: assets/images/splash_light.png
     image_dark: assets/images/splash_dark.png
     icon_background_color: "#FFFFFF"
-    icon_background_color_dark: "#FFFFFF"
+    icon_background_color_dark: "#111B21"
 
 dev_dependencies:
   flutter_test:
