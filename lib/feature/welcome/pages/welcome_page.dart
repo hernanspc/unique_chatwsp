@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:unique_chatwsp/common/utils/coloors.dart';
+import 'package:unique_chatwsp/common/widgets/custom_elevated_button.dart';
+import 'package:unique_chatwsp/feature/welcome/widgets/privacy_and_terms.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});
@@ -36,52 +38,10 @@ class WelcomePage extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 30,
-                      vertical: 20,
-                    ),
-                    child: RichText(
-                      textAlign: TextAlign.center,
-                      text: const TextSpan(
-                        text: 'Read our',
-                        style: TextStyle(
-                          color: Coloors.greyDark,
-                          height: 1.5,
-                        ),
-                        children: [
-                          TextSpan(
-                            text: 'Privacy Policy. ',
-                            style: TextStyle(
-                              color: Coloors.blueDark,
-                            ),
-                          ),
-                          TextSpan(
-                            text: 'Tap "Agree and continue" to accept the ',
-                          ),
-                          TextSpan(
-                            text: 'Terms of Services.',
-                            style: TextStyle(
-                              color: Coloors.blueDark,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 42,
-                    width: MediaQuery.of(context).size.width - 100,
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: Coloors.greenDark,
-                          foregroundColor: Coloors.backgroundDark,
-                          splashFactory: NoSplash.splashFactory,
-                          elevation: 0,
-                          shadowColor: Colors.transparent),
-                      child: const Text('AGREE AND CONTINUE..'),
-                    ),
+                  PrivacyAndTerms(),
+                  CustomElevatedButton(
+                    onPressed: () {},
+                    text: 'AGREE AND CONTINUE..',
                   ),
                   const SizedBox(height: 50),
                   Material(
