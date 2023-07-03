@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:unique_chatwsp/common/utils/coloors.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});
@@ -6,15 +7,19 @@ class WelcomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: const Color(0xFF111B21),
+        backgroundColor: Coloors.backgroundDark,
         body: Column(
           children: [
             Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 50),
-                child: Image.asset(
-                  'assets/images/circle.png',
-                  color: const Color(0xFF00A884),
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+                  child: Image.asset(
+                    'assets/images/circle.png',
+                    color: Coloors.greenDark,
+                  ),
                 ),
               ),
             ),
@@ -41,14 +46,14 @@ class WelcomePage extends StatelessWidget {
                       text: const TextSpan(
                         text: 'Read our',
                         style: TextStyle(
-                          color: Color(0xFF8696A0),
+                          color: Coloors.greyDark,
                           height: 1.5,
                         ),
                         children: [
                           TextSpan(
                             text: 'Privacy Policy. ',
                             style: TextStyle(
-                              color: Color(0xFF53BDEB),
+                              color: Coloors.blueDark,
                             ),
                           ),
                           TextSpan(
@@ -57,7 +62,7 @@ class WelcomePage extends StatelessWidget {
                           TextSpan(
                             text: 'Terms of Services.',
                             style: TextStyle(
-                              color: Color(0xFF53BDEB),
+                              color: Coloors.blueDark,
                             ),
                           ),
                         ],
@@ -70,8 +75,8 @@ class WelcomePage extends StatelessWidget {
                     child: ElevatedButton(
                       onPressed: () {},
                       style: ElevatedButton.styleFrom(
-                          backgroundColor: Color(0xFF00A884),
-                          foregroundColor: Color(0xFF111B21),
+                          backgroundColor: Coloors.greenDark,
+                          foregroundColor: Coloors.backgroundDark,
                           splashFactory: NoSplash.splashFactory,
                           elevation: 0,
                           shadowColor: Colors.transparent),
@@ -80,8 +85,8 @@ class WelcomePage extends StatelessWidget {
                   ),
                   const SizedBox(height: 50),
                   Material(
-                    color: Color(0xFF182229),
-                    borderRadius: BorderRadius.circular(0),
+                    color: const Color(0xFF182229),
+                    borderRadius: BorderRadius.circular(20),
                     child: InkWell(
                       onTap: () {},
                       borderRadius: BorderRadius.circular(20),
@@ -97,18 +102,19 @@ class WelcomePage extends StatelessWidget {
                           children: const [
                             Icon(
                               Icons.language,
+                              color: Coloors.greenDark,
                             ),
                             SizedBox(width: 10),
                             Text(
                               'English',
                               style: TextStyle(
-                                color: Color(0xFF00A884),
+                                color: Coloors.greenDark,
                               ),
                             ),
                             SizedBox(width: 10),
                             Icon(
                               Icons.keyboard_arrow_down,
-                              color: Color(0xFF00A884),
+                              color: Coloors.greenDark,
                             )
                           ],
                         ),
