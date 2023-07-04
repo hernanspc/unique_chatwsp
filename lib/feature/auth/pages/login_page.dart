@@ -103,7 +103,7 @@ class _LoginPageState extends State<LoginPage> {
         title: Text(
           'Enter your phone number',
           style: TextStyle(
-            color: context.theme.authAppBarTextColor,
+            color: context.theme.authAppbarTextColor,
           ),
         ),
         centerTitle: true,
