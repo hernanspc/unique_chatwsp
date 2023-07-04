@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:unique_chatwsp/common/extension/custom_theme_extension.dart';
 import 'package:unique_chatwsp/common/utils/coloors.dart';
 
@@ -7,7 +8,15 @@ ThemeData darkTheme() {
   return base.copyWith(
     backgroundColor: Coloors.backgroundDark,
     scaffoldBackgroundColor: Coloors.backgroundDark,
-    extensions: [CustomThemeExtension.darkMode],
+    extensions: [
+      CustomThemeExtension.darkMode,
+    ],
+    appBarTheme: const AppBarTheme(
+      systemOverlayStyle: SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.light,
+      ),
+    ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         backgroundColor: Coloors.greenDark,
