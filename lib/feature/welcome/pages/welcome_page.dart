@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:unique_chatwsp/common/utils/coloors.dart';
+import 'package:unique_chatwsp/common/extension/custom_theme_extension.dart';
 import 'package:unique_chatwsp/common/widgets/custom_elevated_button.dart';
 import 'package:unique_chatwsp/feature/welcome/widgets/language_button.dart';
 import 'package:unique_chatwsp/feature/welcome/widgets/privacy_and_terms.dart';
@@ -16,10 +16,13 @@ class WelcomePage extends StatelessWidget {
           child: Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 50,
+                vertical: 10,
+              ),
               child: Image.asset(
                 'assets/images/circle.png',
-                color: Coloors.greenDark,
+                color: context.theme.circleImageColor,
               ),
             ),
           ),

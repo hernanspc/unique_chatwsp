@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:unique_chatwsp/common/extension/custom_theme_extension.dart';
 import 'package:unique_chatwsp/common/utils/coloors.dart';
 
 ThemeData lightTheme() {
@@ -6,6 +7,7 @@ ThemeData lightTheme() {
   return base.copyWith(
     backgroundColor: Coloors.backgroundLight,
     scaffoldBackgroundColor: Coloors.backgroundLight,
+    extensions: [CustomThemeExtension.lightMode],
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         backgroundColor: Coloors.greenLight,
