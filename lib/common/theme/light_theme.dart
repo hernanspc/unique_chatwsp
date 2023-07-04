@@ -6,5 +6,14 @@ ThemeData lightTheme() {
   return base.copyWith(
     backgroundColor: Coloors.backgroundLight,
     scaffoldBackgroundColor: Coloors.backgroundLight,
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Coloors.greenLight,
+        foregroundColor: Coloors.backgroundLight,
+        splashFactory: NoSplash.splashFactory,
+        elevation: 0,
+        shadowColor: Colors.transparent,
+      ),
+    ),
   );
 }
