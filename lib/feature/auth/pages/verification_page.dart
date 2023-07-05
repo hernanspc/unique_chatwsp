@@ -4,7 +4,13 @@ import 'package:unique_chatwsp/common/widgets/custom_icon_button.dart';
 import 'package:unique_chatwsp/feature/auth/widgets/custom_text_field.dart';
 
 class VerificationPage extends StatefulWidget {
-  const VerificationPage({super.key});
+  const VerificationPage({
+    super.key,
+    required this.verificationId,
+    required this.phoneNumber,
+  });
+  final String verificationId;
+  final String phoneNumber;
 
   @override
   State<VerificationPage> createState() => _VerificationPageState();

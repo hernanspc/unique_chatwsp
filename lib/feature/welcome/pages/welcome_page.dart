@@ -34,7 +34,7 @@ class WelcomePage extends StatelessWidget {
           child: Column(
             children: [
               const Text(
-                'Welcome to WhassApp Me',
+                'Welcome to WhassAppMe',
                 style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,

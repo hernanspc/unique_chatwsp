@@ -8,6 +8,8 @@ import 'package:unique_chatwsp/feature/auth/pages/verification_page.dart';
 import 'package:unique_chatwsp/feature/welcome/pages/welcome_page.dart';
 import 'package:unique_chatwsp/firebase_options.dart';
 
+import 'common/routes/routes.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -24,11 +26,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'WhassApp Mee',
+      title: 'WhassAppMe',
       theme: lightTheme(),
       darkTheme: darkTheme(),
       themeMode: ThemeMode.system,
-      home: const UserInfoPage(),
+      home: const WelcomePage(),
+      onGenerateRoute: Routes.onGenerateRoute,
     );
   }
 }

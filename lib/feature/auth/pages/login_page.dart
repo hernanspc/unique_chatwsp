@@ -121,7 +121,7 @@ class _LoginPageState extends State<LoginPage> {
             child: RichText(
               textAlign: TextAlign.center,
               text: TextSpan(
-                text: 'WhassApp will need to verify your phone number. ',
+                text: 'WhassAppMe will need to verify your phone number. ',
                 style: TextStyle(
                   color: context.theme.greyColor,
                   height: 1.5,
