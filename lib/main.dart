@@ -1,4 +1,3 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:unique_chatwsp/common/theme/dark_theme.dart';
@@ -7,7 +6,8 @@ import 'package:unique_chatwsp/feature/auth/pages/login_page.dart';
 import 'package:unique_chatwsp/feature/auth/pages/user_info_page.dart';
 import 'package:unique_chatwsp/feature/auth/pages/verification_page.dart';
 import 'package:unique_chatwsp/feature/welcome/pages/welcome_page.dart';
-import 'package:unique_chatwsp/firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 import 'common/routes/routes.dart';
 
