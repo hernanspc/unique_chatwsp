@@ -57,12 +57,16 @@ class _UserInfoPageState extends State<UserInfoPage> {
                 ),
                 const SizedBox(width: 15),
                 imagePickerIcon(
-                  onTap: () {
+                  onTap: () async {
+                    // log('hello');
                     Navigator.pop(context);
-                    Navigator.of(context).push(
+                    final image = await Navigator.push(
+                      context,
                       MaterialPageRoute(
-                          builder: (context) => const ImagePickerPage()),
+                        builder: (context) => const ImagePickerPage(),
+                      ),
                     );
+                    if (image == null) return;
                   },
                   icon: Icons.photo_camera_back_rounded,
                   text: 'Gallery',

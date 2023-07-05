@@ -19,6 +19,8 @@ class _ImagePickerPageState extends State<ImagePickerPage> {
 
   handleScrollEvent(ScrollNotification scroll) {
     if (scroll.metrics.pixels / scroll.metrics.maxScrollExtent <= .33) return;
+    if (currentPage == lastPage) return;
+    fetchAllImages();
   }
 
   fetchAllImages() async {
@@ -56,7 +58,7 @@ class _ImagePickerPageState extends State<ImagePickerPage> {
                     margin: const EdgeInsets.all(2),
                     decoration: BoxDecoration(
                       border: Border.all(
-                        color: context.theme.greyColor!.withOpacity(0.4),
+                        color: context.theme.greyColor!.withOpacity(.4),
                         width: 1,
                       ),
                       image: DecorationImage(
@@ -74,8 +76,10 @@ class _ImagePickerPageState extends State<ImagePickerPage> {
         ),
       );
     }
+
     setState(() {
       imageList.addAll(temp);
+      currentPage++;
     });
   }
 
@@ -90,7 +94,6 @@ class _ImagePickerPageState extends State<ImagePickerPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).backgroundColor,
-        // elevation: 0,
         leading: CustomIconButton(
           onTap: () => Navigator.pop(context),
           icon: Icons.arrow_back,
@@ -109,14 +112,21 @@ class _ImagePickerPageState extends State<ImagePickerPage> {
         ],
       ),
       body: Padding(
-        padding: const EdgeInsets.all(5),
-        child: GridView.builder(
-          itemCount: imageList.length,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3),
-          itemBuilder: (_, index) {
-            return imageList[index];
+        padding: const EdgeInsets.all(5.0),
+        child: NotificationListener(
+          onNotification: (ScrollNotification scroll) {
+            handleScrollEvent(scroll);
+            return true;
           },
+          child: GridView.builder(
+            itemCount: imageList.length,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3,
+            ),
+            itemBuilder: (_, index) {
+              return imageList[index];
+            },
+          ),
         ),
       ),
     );
