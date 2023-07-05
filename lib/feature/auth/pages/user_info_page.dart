@@ -27,7 +27,7 @@ class _UserInfoPageState extends State<UserInfoPage> {
               children: [
                 const SizedBox(width: 20),
                 const Text(
-                  'Profile  photo',
+                  'Profile photo',
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w500,
@@ -69,7 +69,9 @@ class _UserInfoPageState extends State<UserInfoPage> {
                 ),
               ],
             ),
-            const SizedBox(width: 15),
+            const SizedBox(
+              height: 20,
+            ),
           ],
         );
       },
