@@ -6,10 +6,10 @@ import 'package:unique_chatwsp/feature/auth/widgets/custom_text_field.dart';
 class VerificationPage extends StatefulWidget {
   const VerificationPage({
     super.key,
-    required this.verificationId,
+    required this.smsCodeId,
     required this.phoneNumber,
   });
-  final String verificationId;
+  final String smsCodeId;
   final String phoneNumber;
 
   @override
