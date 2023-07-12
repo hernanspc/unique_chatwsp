@@ -8,6 +8,7 @@ import 'package:unique_chatwsp/common/routes/routes.dart';
 import 'package:unique_chatwsp/common/theme/dark_theme.dart';
 import 'package:unique_chatwsp/common/theme/light_theme.dart';
 import 'package:unique_chatwsp/feature/auth/controller/auth_controller.dart';
+import 'package:unique_chatwsp/feature/contact/pages/contact_page.dart';
 import 'package:unique_chatwsp/feature/home/pages/home_page.dart';
 import 'package:unique_chatwsp/feature/welcome/pages/welcome_page.dart';
 import 'package:unique_chatwsp/firebase_options.dart';
@@ -51,6 +52,7 @@ class MyApp extends ConsumerWidget {
             },
             loading: () => const SizedBox(),
           ),
+      // home: const ContactPage(),
       onGenerateRoute: Routes.onGenerateRoute,
     );
   }

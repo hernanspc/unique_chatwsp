@@ -53,6 +53,8 @@
 	</array>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Explicación de cómo se utiliza la biblioteca de fotos en tu aplicación</string>
+	<key>NSContactsUsageDescription</key>
+    <string>Reason we need access to the contact list</string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
