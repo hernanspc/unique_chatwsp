@@ -248,7 +248,7 @@ class _UserInfoPageState extends ConsumerState<UserInfoPage> {
                   child: CustomTextField(
                     controller: usernameController,
                     hintText: 'Escribe tu nombre aquí',
-                    textAlign: TextAlign.start,
+                    textAlign: TextAlign.left,
                     autoFocus: true,
                   ),
                 ),
