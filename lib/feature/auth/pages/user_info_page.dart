@@ -123,7 +123,7 @@ class _UserInfoPageState extends ConsumerState<UserInfoPage> {
 
   pickmageFromCamera() async {
     try {
-      Navigator.pop(context);
+      Navigator.of(context).pop();
       final image = await ImagePicker().pickImage(source: ImageSource.camera);
       setState(() {
         imageCamera = File(image!.path);
