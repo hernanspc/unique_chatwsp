@@ -8,9 +8,7 @@ ThemeData darkTheme() {
   return base.copyWith(
     backgroundColor: Coloors.backgroundDark,
     scaffoldBackgroundColor: Coloors.backgroundDark,
-    extensions: [
-      CustomThemeExtension.darkMode,
-    ],
+    extensions: [CustomThemeExtension.darkMode],
     appBarTheme: const AppBarTheme(
       backgroundColor: Coloors.greyBackground,
       titleTextStyle: TextStyle(
@@ -59,6 +57,18 @@ ThemeData darkTheme() {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),
+    ),
+    floatingActionButtonTheme: const FloatingActionButtonThemeData(
+      backgroundColor: Coloors.greenDark,
+      foregroundColor: Colors.white,
+    ),
+    listTileTheme: const ListTileThemeData(
+      iconColor: Coloors.greyDark,
+      tileColor: Coloors.backgroundDark,
+    ),
+    switchTheme: const SwitchThemeData(
+      thumbColor: MaterialStatePropertyAll(Coloors.greyDark),
+      trackColor: MaterialStatePropertyAll(Color(0xFF344047)),
     ),
   );
 }
