@@ -13,9 +13,9 @@ import 'package:unique_chatwsp/feature/welcome/pages/welcome_page.dart';
 import 'package:unique_chatwsp/firebase_options.dart';
 
 void main() async {
-  // WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-  // FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  // WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -35,10 +35,9 @@ class MyApp extends ConsumerWidget {
       theme: lightTheme(),
       darkTheme: darkTheme(),
       themeMode: ThemeMode.system,
-      // home: const WelcomePage(),
       home: ref.watch(userInfoAuthProvider).when(
             data: (user) {
-              // FlutterNativeSplash.remove();
+              FlutterNativeSplash.remove();
               if (user == null) return const WelcomePage();
               return const HomePage();
             },
