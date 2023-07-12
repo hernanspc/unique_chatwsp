@@ -1,4 +1,10 @@
+import 'dart:developer';
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:unique_chatwsp/common/extension/custom_theme_extension.dart';
 import 'package:unique_chatwsp/common/utils/coloors.dart';
 import 'package:unique_chatwsp/common/widgets/custom_elevated_button.dart';
@@ -7,14 +13,47 @@ import 'package:unique_chatwsp/common/widgets/short_h_bar.dart';
 import 'package:unique_chatwsp/feature/auth/pages/image_picker_page.dart';
 import 'package:unique_chatwsp/feature/auth/widgets/custom_text_field.dart';
 
-class UserInfoPage extends StatefulWidget {
-  const UserInfoPage({super.key});
+import '../../../common/helper/show_alert_dialog.dart';
+import '../controller/auth_controller.dart';
+
+class UserInfoPage extends ConsumerStatefulWidget {
+  const UserInfoPage({super.key, this.profileImageUrl});
+
+  final String? profileImageUrl;
 
   @override
-  State<UserInfoPage> createState() => _UserInfoPageState();
+  ConsumerState<UserInfoPage> createState() => _UserInfoPageState();
 }
 
-class _UserInfoPageState extends State<UserInfoPage> {
+class _UserInfoPageState extends ConsumerState<UserInfoPage> {
+  File? imageCamera;
+  Uint8List? imageGallery;
+
+  late TextEditingController usernameController;
+
+  saveUserDataToFirebase() {
+    String username = usernameController.text;
+    if (username.isEmpty) {
+      return showAlertDialog(
+        context: context,
+        message: 'Please provide a username',
+      );
+    } else if (username.length < 3 || username.length > 20) {
+      return showAlertDialog(
+        context: context,
+        message: 'A username length should be between 3-20',
+      );
+    }
+
+    // ref.read(authControllerProvider).saveUserInfoToFirestore(
+    //       username: username,
+    //       profileImage:
+    //           imageCamera ?? imageGallery ?? widget.profileImageUrl ?? '',
+    //       context: context,
+    //       mounted: mounted,
+    //     );
+  }
+
   imagePickerTypeBottomSheet() {
     return showModalBottomSheet(
       context: context,
@@ -22,7 +61,7 @@ class _UserInfoPageState extends State<UserInfoPage> {
         return Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            // const ShortHBar(),
+            const ShortHBar(),
             Row(
               children: [
                 const SizedBox(width: 20),
@@ -38,27 +77,25 @@ class _UserInfoPageState extends State<UserInfoPage> {
                   onTap: () => Navigator.pop(context),
                   icon: Icons.close,
                 ),
-                const SizedBox(width: 20),
+                const SizedBox(width: 15),
               ],
             ),
             Divider(
-              color: context.theme.greyColor!.withOpacity(0.3),
+              color: context.theme.greyColor!.withOpacity(.3),
             ),
-            const SizedBox(
-              height: 5,
-            ),
+            const SizedBox(height: 5),
             Row(
               children: [
                 const SizedBox(width: 20),
                 imagePickerIcon(
-                  onTap: () {},
+                  onTap: () => pickmageFromCamera,
                   icon: Icons.camera_alt_rounded,
                   text: 'Camera',
                 ),
                 const SizedBox(width: 15),
                 imagePickerIcon(
                   onTap: () async {
-                    // log('hello');
+                    log('hello');
                     Navigator.pop(context);
                     final image = await Navigator.push(
                       context,
@@ -67,19 +104,34 @@ class _UserInfoPageState extends State<UserInfoPage> {
                       ),
                     );
                     if (image == null) return;
+                    setState(() {
+                      imageGallery = image;
+                      imageCamera = null;
+                    });
                   },
                   icon: Icons.photo_camera_back_rounded,
                   text: 'Gallery',
                 ),
               ],
             ),
-            const SizedBox(
-              height: 20,
-            ),
+            const SizedBox(height: 15),
           ],
         );
       },
     );
+  }
+
+  pickmageFromCamera() async {
+    try {
+      Navigator.pop(context);
+      final image = await ImagePicker().pickImage(source: ImageSource.camera);
+      setState(() {
+        imageCamera = File(image!.path);
+        imageGallery = null;
+      });
+    } catch (e) {
+      showAlertDialog(context: context, message: e.toString());
+    }
   }
 
   imagePickerIcon({
@@ -99,13 +151,27 @@ class _UserInfoPageState extends State<UserInfoPage> {
             width: 1,
           ),
         ),
-        SizedBox(height: 5),
+        const SizedBox(height: 5),
         Text(
           text,
-          style: TextStyle(color: context.theme.greyColor),
+          style: TextStyle(
+            color: context.theme.greyColor,
+          ),
         ),
       ],
     );
+  }
+
+  @override
+  void initState() {
+    usernameController = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    usernameController.dispose();
+    super.dispose();
   }
 
   @override
@@ -116,7 +182,9 @@ class _UserInfoPageState extends State<UserInfoPage> {
         elevation: 0,
         title: Text(
           'Profile info',
-          style: TextStyle(color: context.theme.authAppbarTextColor),
+          style: TextStyle(
+            color: context.theme.authAppbarTextColor,
+          ),
         ),
         centerTitle: true,
       ),
@@ -131,9 +199,7 @@ class _UserInfoPageState extends State<UserInfoPage> {
                 color: context.theme.greyColor,
               ),
             ),
-            const SizedBox(
-              height: 40,
-            ),
+            const SizedBox(height: 40),
             GestureDetector(
               onTap: imagePickerTypeBottomSheet,
               child: Container(
@@ -141,24 +207,47 @@ class _UserInfoPageState extends State<UserInfoPage> {
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: context.theme.photoIconBgColor,
+                  border: Border.all(
+                    color: imageCamera == null && imageGallery == null
+                        ? Colors.transparent
+                        : context.theme.greyColor!.withOpacity(.4),
+                  ),
+                  image: imageCamera != null ||
+                          imageGallery != null ||
+                          widget.profileImageUrl != null
+                      ? DecorationImage(
+                          fit: BoxFit.cover,
+                          image: imageGallery != null
+                              ? MemoryImage(imageGallery!)
+                              : widget.profileImageUrl != null
+                                  ? NetworkImage(widget.profileImageUrl!)
+                                  : FileImage(imageCamera!) as ImageProvider,
+                        )
+                      : null,
                 ),
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 3, right: 3),
-                  child: Icon(Icons.add_a_photo_rounded,
-                      size: 48, color: context.theme.photoIconColor),
+                  child: Icon(
+                    Icons.add_a_photo_rounded,
+                    size: 48,
+                    color: imageCamera == null &&
+                            imageGallery == null &&
+                            widget.profileImageUrl == null
+                        ? context.theme.photoIconColor
+                        : Colors.transparent,
+                  ),
                 ),
               ),
             ),
-            const SizedBox(
-              height: 40,
-            ),
+            const SizedBox(height: 40),
             Row(
               children: [
                 const SizedBox(width: 20),
-                const Expanded(
-                  child: const CustomTextField(
+                Expanded(
+                  child: CustomTextField(
+                    controller: usernameController,
                     hintText: 'Type your name here',
-                    textAlign: TextAlign.left,
+                    textAlign: TextAlign.start,
                     autoFocus: true,
                   ),
                 ),
@@ -167,15 +256,15 @@ class _UserInfoPageState extends State<UserInfoPage> {
                   Icons.emoji_emotions_outlined,
                   color: context.theme.photoIconColor,
                 ),
-                const SizedBox(width: 20),
+                const SizedBox(width: 10),
               ],
-            )
+            ),
           ],
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: CustomElevatedButton(
-        onPressed: () {},
+        onPressed: saveUserDataToFirebase,
         text: 'NEXT',
         buttonWidth: 90,
       ),

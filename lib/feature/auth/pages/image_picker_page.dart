@@ -34,7 +34,7 @@ class _ImagePickerPageState extends State<ImagePickerPage> {
     );
 
     List<AssetEntity> photos = await albums[0].getAssetListPaged(
-      page: 0,
+      page: currentPage,
       size: 24,
     );
 
