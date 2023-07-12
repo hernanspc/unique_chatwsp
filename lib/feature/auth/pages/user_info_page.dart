@@ -88,7 +88,7 @@ class _UserInfoPageState extends ConsumerState<UserInfoPage> {
               children: [
                 const SizedBox(width: 20),
                 imagePickerIcon(
-                  onTap: () => pickmageFromCamera,
+                  onTap: pickmageFromCamera,
                   icon: Icons.camera_alt_rounded,
                   text: 'Camera',
                 ),
@@ -210,7 +210,7 @@ class _UserInfoPageState extends ConsumerState<UserInfoPage> {
                   border: Border.all(
                     color: imageCamera == null && imageGallery == null
                         ? Colors.transparent
-                        : context.theme.greyColor!.withOpacity(.4),
+                        : context.theme.greyColor!.withOpacity(0.4),
                   ),
                   image: imageCamera != null ||
                           imageGallery != null ||
