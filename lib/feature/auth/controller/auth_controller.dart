@@ -5,14 +5,29 @@ import 'package:unique_chatwsp/feature/auth/repository/auth_repository.dart';
 final authControllerProvider = Provider(
   (ref) {
     final authRespository = ref.watch(authRepositoryProvider);
-    return AuthController(authRepository: authRespository);
+    return AuthController(authRepository: authRespository, ref: ref);
   },
 );
 
 class AuthController {
   final AuthRepository authRepository;
+  final ProviderRef ref;
+  AuthController({required this.authRepository, required this.ref});
 
-  AuthController({required this.authRepository});
+  void saveUserInfoToFirestore({
+    required String username,
+    required var profileImage,
+    required BuildContext context,
+    required bool mounted,
+  }) {
+    authRepository.saveUserInfoToFirestore(
+      username: username,
+      profileImage: profileImage,
+      ref: ref,
+      context: context,
+      mounted: mounted,
+    );
+  }
 
   void verifySmsCode({
     required BuildContext context,

@@ -33,25 +33,26 @@ class _UserInfoPageState extends ConsumerState<UserInfoPage> {
 
   saveUserDataToFirebase() {
     String username = usernameController.text;
+    // log('my username: ' + username + ' ' + username.length.toString());
     if (username.isEmpty) {
       return showAlertDialog(
         context: context,
-        message: 'Please provide a username',
+        message: 'Proporcione un nombre de usuario',
       );
     } else if (username.length < 3 || username.length > 20) {
       return showAlertDialog(
         context: context,
-        message: 'A username length should be between 3-20',
+        message: 'La longitud de un nombre de usuario debe estar entre 3 y 20',
       );
     }
 
-    // ref.read(authControllerProvider).saveUserInfoToFirestore(
-    //       username: username,
-    //       profileImage:
-    //           imageCamera ?? imageGallery ?? widget.profileImageUrl ?? '',
-    //       context: context,
-    //       mounted: mounted,
-    //     );
+    ref.read(authControllerProvider).saveUserInfoToFirestore(
+          username: username,
+          profileImage:
+              imageCamera ?? imageGallery ?? widget.profileImageUrl ?? '',
+          context: context,
+          mounted: mounted,
+        );
   }
 
   imagePickerTypeBottomSheet() {
@@ -193,7 +194,7 @@ class _UserInfoPageState extends ConsumerState<UserInfoPage> {
         child: Column(
           children: [
             Text(
-              'Please provide your name and an optional profile photo',
+              'Proporcione su nombre y una foto de perfil',
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: context.theme.greyColor,
@@ -246,7 +247,7 @@ class _UserInfoPageState extends ConsumerState<UserInfoPage> {
                 Expanded(
                   child: CustomTextField(
                     controller: usernameController,
-                    hintText: 'Type your name here',
+                    hintText: 'Escribe tu nombre aquí',
                     textAlign: TextAlign.start,
                     autoFocus: true,
                   ),
