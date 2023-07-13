@@ -1,8 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:unique_chatwsp/common/models/user_model.dart';
 import 'package:unique_chatwsp/feature/auth/pages/login_page.dart';
 import 'package:unique_chatwsp/feature/auth/pages/user_info_page.dart';
 import 'package:unique_chatwsp/feature/auth/pages/verification_page.dart';
+import 'package:unique_chatwsp/feature/chat/pages/chat_page.dart';
 import 'package:unique_chatwsp/feature/contact/pages/contact_page.dart';
 import 'package:unique_chatwsp/feature/home/pages/home_page.dart';
 import 'package:unique_chatwsp/feature/welcome/pages/welcome_page.dart';
@@ -50,7 +52,11 @@ class Routes {
         return MaterialPageRoute(
           builder: (context) => const ContactPage(),
         );
-
+      case chat:
+        final UserModel user = settings.arguments as UserModel;
+        return MaterialPageRoute(
+          builder: (context) => ChatPage(user: user),
+        );
       default:
         return MaterialPageRoute(
           builder: (context) => const Scaffold(
