@@ -4,7 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:unique_chatwsp/common/models/user_model.dart';
-import 'package:unique_chatwsp/common/models/user_model.dart';
 
 final contactsRepositoryProvider = Provider(
   (ref) {
@@ -27,6 +26,11 @@ class ContactsRepository {
         final allContactsInThePhone = await FlutterContacts.getContacts(
           withProperties: true,
         );
+
+        // List<String> contactNames = allContactsInThePhone
+        //     .map((contact) => contact.displayName ?? '')
+        //     .toList();
+        // print('log: $contactNames');
 
         bool isContactFound = false;
 
