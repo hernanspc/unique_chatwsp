@@ -32,9 +32,12 @@ class _UserInfoPageState extends ConsumerState<UserInfoPage> {
   late TextEditingController usernameController;
 
   saveUserDataToFirebase() {
-    String username = usernameController.text;
-    // log('my username: ' + username + ' ' + username.length.toString());
-    if (username.isEmpty) {
+    String? username = usernameController.text;
+    print('my username: ' +
+        (username ?? "") +
+        ' ' +
+        (username?.length.toString() ?? ""));
+    if (username == null || username.isEmpty) {
       return showAlertDialog(
         context: context,
         message: 'Proporcione un nombre de usuario',
